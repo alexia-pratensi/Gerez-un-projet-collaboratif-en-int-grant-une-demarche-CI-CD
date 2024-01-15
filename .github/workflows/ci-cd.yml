@@ -28,18 +28,17 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-          rm -f package-lock.json
-          npm install
-          npm ci
+            npm install
+            npm ci
         
       - name: Run frontend tests
-        run: npm run test -- --no-watch --browsers=ChromeHeadless --reporters=spec,junit --code-coverage 
+        run: npm run test -- --no-watch --browsers=ChromeHeadless --code-coverage 
       
       - name: Upload frontend coverage Report
         uses: actions/upload-artifact@v3
         with:
           name: frontend-coverage-report
-          path: front/coverage/bobapp
+          path: front/coverage/bobapp/
     
   test_job_backend:
     name: Backend Tests with JaCoCo Report
@@ -109,7 +108,6 @@ jobs:
 
   sonarcould_frontend_job:
     name: SonarCloud Scan frontend side
-    needs: test_job_frontend
     runs-on: ubuntu-latest
 
     defaults:
@@ -129,9 +127,8 @@ jobs:
 
       - name: install dependencies
         run: |
-          rm -f package-lock.json
-          npm install
-          npm ci
+            npm install
+            npm ci
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
@@ -141,7 +138,7 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
       
       - name: run frontend tests
-        run: npm run test -- --no-watch --browsers=ChromeHeadless --reporters=spec,junit --code-coverage
+        run: npm run test -- --no-watch --browsers=ChromeHeadless --code-coverage
         
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -192,4 +189,3 @@ jobs:
           file: ./${{ matrix.component }}/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:${{ matrix.component }}
-
