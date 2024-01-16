@@ -148,7 +148,7 @@ jobs:
             -Dsonar.projectKey=alexia-pratensi_bobapp-front
             -Dsonar.organization=alexia-pratensi
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
-            -DqualityGateWait=true
+            -Dsonar.qualitygate.wait=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -190,5 +190,3 @@ jobs:
           file: ./${{ matrix.component }}/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:${{ matrix.component }}
-
-          # comment to test PR
