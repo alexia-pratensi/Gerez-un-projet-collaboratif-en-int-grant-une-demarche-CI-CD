@@ -1,8 +1,10 @@
+![passed](https://github.com/alexia-pratensi/gerez-un-projet-collaboratif-en-int-grant-une-demarche-ci-cd/actions/workflows/ci-cd.yml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alexia-pratensi_bobapp-back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=alexia-pratensi_bobapp-back)
 # BobApp
 
 Clone project:
 
-> git clone XXXXX
+> git clone https://github.com/alexia-pratensi/gerez-un-projet-collaboratif-en-int-grant-une-demarche-ci-cd.git
 
 ## Front-end 
 
