@@ -32,7 +32,7 @@ jobs:
             npm ci
         
       - name: Run frontend tests
-        run: npm run test -- --no-watch --code-coverage 
+        run: npm run test -- --no-watch --browsers=ChromeHeadless --code-coverage 
       
       - name: Upload frontend coverage Report
         uses: actions/upload-artifact@v3
