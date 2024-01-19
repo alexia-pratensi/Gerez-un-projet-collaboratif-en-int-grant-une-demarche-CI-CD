@@ -71,8 +71,9 @@ jobs:
           name: backend-coverage-report
           path: back/target/site/jacoco/
 
-  sonarcould_backend_job:
+  sonarcloud_backend_job:
     name: SonarCloud Scan backend side
+    needs: test_backend_job
     runs-on: ubuntu-latest
 
     defaults:
@@ -112,8 +113,9 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=alexia-pratensi_bobapp-back -Dsonar.qualitygate.wait=true
         working-directory: back
 
-  sonarcould_frontend_job:
+  sonarcloud_frontend_job:
     name: SonarCloud Scan frontend side
+    needs: test_frontend_job
     runs-on: ubuntu-latest
 
     defaults:
@@ -161,7 +163,7 @@ jobs:
 
   docker_build_job:
     name: Build ${{matrix.component}} Docker image and push to Docker Hub
-    needs: [sonarcould_backend_job, sonarcould_frontend_job]
+    needs: [sonarcloud_backend_job, sonarcloud_frontend_job]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
   
